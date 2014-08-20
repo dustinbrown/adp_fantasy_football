@@ -35,8 +35,10 @@ end
 
 #Remove player from available list
 post '/draft/' do
+
+	puts "DEBUG: #{params[:nameid]}"
 	#Add player to drafted_players array
-	drafted_players << my_players.select { |player| player[:id] ==  params[:nameid] }.first
+	drafted_players << my_players.select { |player| player[:id] ==  params[:nameid] }.first if ! my_players.select { |player| player[:id] ==  params[:nameid] }.empty?
 	
   #Remove player from array -- uses id from button clicked
   my_players.delete_if {|player| player[:id] == params[:nameid] }
@@ -53,8 +55,13 @@ end
 
 post '/undraft/' do
 	#Add player to drafted_players array
-	my_players << drafted_players.select { |player| player[:id] ==  params[:nameid] }.first
-	
+	if my_players.select { |player| player[:id] ==  params[:nameid] }.empty?
+		my_players << drafted_players.select { |player| player[:id] ==  params[:nameid] }.first
+  	
+		#Remove player from array -- uses id from button clicked
+  	drafted_players.delete_if {|player| player[:id] == params[:nameid] }
+	end
+
   #Show adp webpage
   erb :adp, :locals => {'players' => my_players}
   
