@@ -15,6 +15,7 @@ players = JSON.parse(open("http://football.myfantasyleague.com/2014/export?TYPE=
 adp = JSON.parse(open("http://football.myfantasyleague.com/2014/export?TYPE=adp&L=&W=&JSON=1").read)
 
 my_players = []
+drafted_players = []
 
 #Create my_players array with adp plus player details
 # I'm sure there are 15 better ways to do this..
@@ -34,11 +35,29 @@ end
 
 #Remove player from available list
 post '/draft/' do
+	#Add player to drafted_players array
+	drafted_players << my_players.select { |player| player[:id] ==  params[:nameid] }.first
+	
   #Remove player from array -- uses id from button clicked
   my_players.delete_if {|player| player[:id] == params[:nameid] }
 
   #Show adp webpage
   erb :adp, :locals => {'players' => my_players}
+end
+
+get '/drafted/' do
+  
+	erb :drafted, :locals => {'players' => drafted_players}
+
+end
+
+post '/undraft/' do
+	#Add player to drafted_players array
+	my_players << drafted_players.select { |player| player[:id] ==  params[:nameid] }.first
+	
+  #Show adp webpage
+  erb :adp, :locals => {'players' => my_players}
+  
 end
 
 #Show players by position
