@@ -1,0 +1,15 @@
+<TABLE BORDER="0">
+  <TH>name</TH>
+  <TH>adp</TH>
+  <TH>position</TH>
+  <TH>team</TH>
+<% players.sort_by { |player1| player1[:adp] }.each do | player| %>
+  <TR><form action="/draft/" method="POST">
+    <TD><%= player[:name] %></TD>
+    <TD><%= player[:adp] %></TD>
+    <TD><%= player[:position] %></TD>
+    <TD><%=player[:team] %></TD>
+    <TD><button name="nameid" value=<%= player[:id]%>>Draft</button></TD>
+  </TR></form>
+<% end %>
+</TABLE>

@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title>Fantasy Football Drafter Helper</title>
+</head>
+<body>
+  <h3>ADP from <a href="http://football.myfantasyleague.com/2014/adp">http://football.myfantasyleague.com/2014/adp</a></h3>
+  <TABLE BORDER="0">
+    <TR>
+      <TD><FORM METHOD="LINK" ACTION="http://localhost:8080">
+          <INPUT TYPE="submit" VALUE="Home">
+      </FORM></TD>
+
+      <TD><form action="/position/" method="POST">
+        <button name="position" value="qb">QB</button></p>
+      </form></TD>
+
+      <TD><form action="/position/" method="POST">
+        <button name="position" value="rb">RB</button></p>
+      </form></TD>
+
+      <TD><form action="/position/" method="POST">
+        <button name="position" value="wr">WR</button></p>
+      </form></TD>
+
+      <TD><form action="/position/" method="POST">
+        <button name="position" value="te">TE</button></p>
+      </form></TD>
+
+      <TD><form action="/position/" method="POST">
+        <button name="position" value="def">DEF</button></p>
+      </form></TD>
+
+      <TD><form action="/position/" method="POST">
+        <button name="position" value="pk">K</button></p>
+      </form></TD>
+
+      <TD><form action="/position/" method="POST">
+        <button name="position" value="s|cb|de|dt|lb">QB</button></p>
+      </form></TD>
+
+    </TR>
+  </TABLE>
+
+<%= yield %>
+
+</body>
+</html>
